@@ -40,7 +40,24 @@ def menu():
         cv2.waitKey(0)
         
     elif option ==6:
-        pass
+        #Reconocimiento facial
+        faceClassif = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+        img = cv2.imread("rosie.png")
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        faces = faceClassif.detectMultiScale(gray,
+            scaleFactor=1.1,
+            minNeighbors=5,
+            minSize=(30,30),
+            maxSize=(800,800))
+
+        for (x,y,w,h) in faces:
+            cv2.circle(img, (int(x + w/2), int(y + h/2)), int(h/2), (255, 0, 0), 2)
+        
+        cv2.imshow('Face detected Image',img)
+        cv2.imwrite("Face detected Image.jpg", img)
+        cv2.waitKey(0)
+
     elif option ==7:
         # Leer imagen
         img = cv2.imread("rosie.png")
