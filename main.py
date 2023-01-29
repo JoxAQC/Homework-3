@@ -19,7 +19,14 @@ def menu():
     Elija una opcion: """
     option = int(input(menu))
     if option == 1:
-        pass
+        img = cv2.imread('rosie.png')
+        b, g, r = cv2.split(img)
+        img[:,:,0]=0
+        img[:,:,1]=0
+        cv2.imshow('Red',img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        cv2.imwrite("canal_rojo.png", img)
     elif option ==2:
         pass
     elif option ==3:
@@ -118,20 +125,19 @@ def menu():
         im_.info['dpi'] = (72, 72)
 
         #Mostrar canal rojo
-        im_xd = np.array(im_)
+        imge = np.array(im_)
 
-        # Separar los canales de color de la imagen original
-        B, G, R = cv2.split(im_xd)
+        #Separar los canales de color de la imagen original
+        b, g, r = cv2.split(imge)
 
-        # Crear una imagen solo con el canal rojo
-        img_red = cv2.merge((R, R, R))
-
-        # Guardar la imagen modificada en disco duro
-        cv2.imwrite("canal_rojo.png", img_red)
-
+        imge[:,:,0]=0
+        imge[:,:,1]=0
+        
+        #Guardar la imagen modificada en disco duro
+        cv2.imwrite("canal_rojo.png", imge)
 
         #convertir la imagen a un array numpy
-        im_array = np.array(img_red)
+        im_array = np.array(imge)
 
         #aplicar una función de escalamiento para reducir el número de niveles de intensidad a 16
         im_array16 = (im_array // 16)*  16
@@ -149,7 +155,7 @@ def menu():
         im2.save("rosie_2.png")
 
         # Mostrar imagen final
-        cv2.imshow("canal_rojo.png", img_red)
+        cv2.imshow("canal_rojo.png", imge)
         cv2.waitKey(0)
         
     else:
