@@ -23,7 +23,15 @@ def menu():
     elif option ==2:
         pass
     elif option ==3:
-        pass
+        im = Image.open("rosie.png")
+        im_array = np.array(im)
+        im_array16 = (im_array // 16)*  16
+        im_16 = Image.fromarray(im_array16)
+        im_16.save("imagen_16.png")
+        im_16.show("imagen_16.png")
+        im2 = im.convert('1')
+        im2.save("imagen_2.png")
+        im2.show("imagen_2.png")
     elif option ==4:
         image = cv2.imread("rosie.png")
         image_norm = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
