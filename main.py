@@ -1,7 +1,5 @@
-import albumentations as albu
 from PIL import Image
 import numpy as np
-from matplotlib import pyplot as plt
 import cv2
 
 def menu():
@@ -28,7 +26,15 @@ def menu():
         cv2.destroyAllWindows()
         cv2.imwrite("canal_rojo.png", img)
     elif option ==2:
-        pass
+        image = cv2.imread("rosie.png")
+        #Reducir la resolución espacial a 72dpi
+        image_ = Image.fromarray(image)
+        image_.info['dpi'] = (72, 72)
+        im_array = np.array(image_)
+        cv2.imshow('Image_72', im_array)
+        cv2.imwrite("Image_72.jpg", im_array)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
     elif option ==3:
         im = Image.open("rosie.png")
         im_array = np.array(im)
@@ -163,5 +169,4 @@ def menu():
 
 if __name__ == "__main__":
     menu()
-
 
