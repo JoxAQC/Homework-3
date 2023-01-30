@@ -2,6 +2,8 @@ from PIL import Image
 import numpy as np
 import cv2
 
+prueba = 'kevin.png'
+
 def menu():
     menu = """
     ---------HOMEWORK 3: IMAGE TRANSFORMATIONS----------
@@ -17,7 +19,7 @@ def menu():
     Elija una opcion: """
     option = int(input(menu))
     if option == 1:
-        img = cv2.imread('rosie.png')
+        img = cv2.imread(prueba)
         b, g, r = cv2.split(img)
         img[:,:,0]=0
         img[:,:,1]=0
@@ -26,7 +28,7 @@ def menu():
         cv2.destroyAllWindows()
         cv2.imwrite("canal_rojo.png", img)
     elif option ==2:
-        image = cv2.imread("rosie.png")
+        image = cv2.imread(prueba)
         #Reducir la resolución espacial a 72dpi
         image_ = Image.fromarray(image)
         image_.info['dpi'] = (72, 72)
@@ -36,7 +38,7 @@ def menu():
         cv2.waitKey(0)
         cv2.destroyAllWindows()
     elif option ==3:
-        im = Image.open("rosie.png")
+        im = Image.open(prueba)
         im_array = np.array(im)
         im_array16 = (im_array // 16)*  16
         im_16 = Image.fromarray(im_array16)
@@ -46,16 +48,16 @@ def menu():
         im2.save("imagen_2.png")
         im2.show("imagen_2.png")
     elif option ==4:
-        image = cv2.imread("rosie.png")
+        image = cv2.imread(prueba)
         image_norm = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
         cv2.imshow('Rotated Image', image_norm)
         cv2.imwrite("Rotated Image.jpg", image_norm)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-        menu()
+        
     elif option ==5:
-        imagen = cv2.imread('ave.jpg')
-        flip0 = cv2.flip(imagen,0)
+        imagen = cv2.imread(prueba)
+        flip0 = cv2.flip(imagen,1)
         cv2.imshow('Reflected Image',flip0)
         cv2.imwrite("Reflected Image.jpg", flip0)
         cv2.waitKey(0)
@@ -63,7 +65,7 @@ def menu():
     elif option ==6:
         #Reconocimiento facial
         faceClassif = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-        img = cv2.imread("rosie.png")
+        img = cv2.imread(prueba)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         faces = faceClassif.detectMultiScale(gray,
@@ -81,7 +83,7 @@ def menu():
 
     elif option ==7:
         # Leer imagen
-        img = cv2.imread("rosie.png")
+        img = cv2.imread(prueba)
         # Obtener las dimensiones de la imagen
         height, width = img.shape[:2]
         # Generar la matriz de transformación shear
@@ -97,7 +99,7 @@ def menu():
     elif option ==8:
         #Reconocimiento facial
         faceClassif = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-        img = cv2.imread("rosie.png")
+        img = cv2.imread(prueba)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         faces = faceClassif.detectMultiScale(gray,
@@ -152,13 +154,13 @@ def menu():
         im_16 = Image.fromarray(im_array16)
 
         #guardar la imagen con 16 niveles de intensidad
-        im_16.save("rosie_16.png")
+        im_16.save("prueba_16.png")
 
         ##Imagen a 2 niveles de intesidad
         im2 = im_.convert('1')
 
         #guardar la imagen para convertir a 2 niveles de intensidad
-        im2.save("rosie_2.png")
+        im2.save("prueba_2.png")
 
         # Mostrar imagen final
         cv2.imshow("canal_rojo.png", imge)
